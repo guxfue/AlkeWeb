@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% block titulo %}Amenazas — CiberSeguro{% endblock %}
+
+{% block contenido %}
+
+<h2 class="section-title mb-1">// REGISTRO DE AMENAZAS</h2>
+<p class="section-subtitle">root@ciberseguro:~$ threat-scan --all --verbose</p>
+
+<div class="row g-4">
+    {% for amenaza in amenazas %}
+    <div class="col-md-4">
+        <div class="card-hack h-100 p-4 text-center">
+            <div class="terminal-prefix">threat_id::{{ forloop.counter|stringformat:"02d" }}</div>
+            <span class="amenaza-icono">{{ amenaza.icono }}</span>
+            <h5 class="card-title mb-2">{{ amenaza.nombre|upper }}</h5>
+            <p class="card-text mb-3">{{ amenaza.descripcion }}</p>
+            <span class="nivel-badge
+                {% if amenaza.nivel == 'Crítico' %}nivel-critico
+                {% elif amenaza.nivel == 'Alto' %}nivel-alto
+                {% else %}nivel-medio{% endif %}">
+                ● NIVEL: {{ amenaza.nivel|upper }}
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

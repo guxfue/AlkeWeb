@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% block titulo %}Inicio — CiberSeguro{% endblock %}
+
+{% block contenido %}
+
+<div class="hero-hack">
+    <p class="terminal-prefix mb-2">root@ciberseguro:~$ ./sistema --status</p>
+    <h1>CIBER_SEGURO</h1>
+    <p class="subtitulo">PORTAL DE INTELIGENCIA EN CIBERSEGURIDAD</p>
+    <div class="status-bar">
+        <span class="dot"></span> SISTEMA OPERATIVO — AMENAZAS MONITOREADAS
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card-hack h-100 text-center p-4">
+            <div class="terminal-prefix">// módulo_01</div>
+            <span class="amenaza-icono">⚠️</span>
+            <h5 class="card-title mb-2">AMENAZAS DIGITALES</h5>
+            <p class="card-text mb-4">
+                Análisis de los vectores de ataque más utilizados en entornos digitales actuales.
+            </p>
+            <a href="{% url 'amenazas' %}" class="btn btn-hack btn-hack-rojo">
+                &gt; acceder
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card-hack h-100 text-center p-4">
+            <div class="terminal-prefix">// módulo_02</div>
+            <span class="amenaza-icono">🛡️</span>
+            <h5 class="card-title mb-2">PROTOCOLOS DE DEFENSA</h5>
+            <p class="card-text mb-4">
+                Buenas prácticas y medidas de protección para blindar tu identidad digital.
+            </p>
+            <a href="{% url 'consejos' %}" class="btn btn-hack btn-hack-verde">
+                &gt; acceder
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

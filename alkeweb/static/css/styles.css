@@ -1,0 +1,355 @@
+/* ===== Google Font: monoespaciada hacker ===== */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+
+/* ===== Variables ===== */
+:root {
+    --negro:        #000000;
+    --negro-panel:  #030a03;
+    --negro-card:   #040d04;
+    --verde:        #00ff41;
+    --verde-dim:    #00cc33;
+    --verde-oscuro: #003b0c;
+    --verde-glow:   rgba(0, 255, 65, 0.15);
+    --verde-borde:  #00ff4133;
+    --rojo-hack:    #ff003c;
+    --amarillo:     #f0e030;
+    --texto:        #a0ffb0;
+    --texto-dim:    #4a7a52;
+    --fuente-mono:  'Share Tech Mono', monospace;
+    --fuente-titulo:'Orbitron', monospace;
+}
+
+/* ===== Reset / Body ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--negro);
+    color: var(--texto);
+    font-family: var(--fuente-mono);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Efecto scanlines */
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.015) 2px,
+        rgba(0, 255, 65, 0.015) 4px
+    );
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--negro); }
+::-webkit-scrollbar-thumb { background: var(--verde-oscuro); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--verde); }
+
+/* ===== Navbar ===== */
+.navbar-hack {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+    border-bottom: 1px solid var(--verde-borde);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-family: var(--fuente-titulo);
+    color: var(--verde) !important;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--verde), 0 0 20px var(--verde-dim);
+}
+
+.navbar-brand:hover {
+    text-shadow: 0 0 20px var(--verde), 0 0 40px var(--verde-dim);
+}
+
+.nav-link-hack {
+    color: var(--texto-dim) !important;
+    font-family: var(--fuente-mono);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem !important;
+    position: relative;
+}
+
+.nav-link-hack::before {
+    content: '> ';
+    color: var(--verde);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav-link-hack:hover {
+    color: var(--verde) !important;
+    text-shadow: 0 0 8px var(--verde);
+}
+
+.nav-link-hack:hover::before {
+    opacity: 1;
+}
+
+/* ===== Hero Section ===== */
+.hero-hack {
+    background-color: var(--negro-panel);
+    border: 1px solid var(--verde-borde);
+    border-radius: 4px;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+}
+
+/* Esquinas decorativas del hero */
+.hero-hack::before,
+.hero-hack::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-color: var(--verde);
+    border-style: solid;
+}
+
+.hero-hack::before {
+    top: 10px; left: 10px;
+    border-width: 2px 0 0 2px;
+}
+
+.hero-hack::after {
+    bottom: 10px; right: 10px;
+    border-width: 0 2px 2px 0;
+}
+
+.hero-hack h1 {
+    font-family: var(--fuente-titulo);
+    color: var(--verde);
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px var(--verde), 0 0 30px var(--verde-dim);
+    margin-bottom: 1rem;
+}
+
+.hero-hack .subtitulo {
+    color: var(--texto-dim);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+/* Barra de estado del hero */
+.status-bar {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.75rem;
+    color: var(--verde-dim);
+    letter-spacing: 1px;
+    border: 1px solid var(--verde-oscuro);
+    padding: 4px 14px;
+    border-radius: 2px;
+}
+
+.status-bar .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: var(--verde);
+    border-radius: 50%;
+    margin-right: 7px;
+    box-shadow: 0 0 6px var(--verde);
+    animation: pulso 1.5s infinite;
+}
+
+@keyframes pulso {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+}
+
+/* ===== Cards ===== */
+.card-hack {
+    background-color: var(--negro-card);
+    border: 1px solid var(--verde-borde);
+    border-radius: 4px;
+    color: var(--texto);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Línea superior decorativa */
+.card-hack::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--verde), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card-hack:hover {
+    border-color: var(--verde);
+    box-shadow: 0 0 20px var(--verde-glow), inset 0 0 20px rgba(0, 255, 65, 0.03);
+    transform: translateY(-4px);
+}
+
+.card-hack:hover::before {
+    opacity: 1;
+}
+
+.card-hack .card-title {
+    font-family: var(--fuente-titulo);
+    color: var(--verde);
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px var(--verde-dim);
+}
+
+.card-hack .card-text {
+    color: var(--texto-dim);
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+
+/* Etiqueta de nivel en amenazas */
+.nivel-critico  { color: var(--rojo-hack);  border: 1px solid var(--rojo-hack);  text-shadow: 0 0 6px var(--rojo-hack); }
+.nivel-alto     { color: var(--amarillo);   border: 1px solid var(--amarillo);   text-shadow: 0 0 6px var(--amarillo); }
+.nivel-medio    { color: var(--verde);      border: 1px solid var(--verde);      text-shadow: 0 0 6px var(--verde); }
+
+.nivel-badge {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-family: var(--fuente-mono);
+    background: transparent;
+}
+
+/* Icono de amenaza */
+.amenaza-icono {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.8rem;
+    filter: drop-shadow(0 0 6px var(--verde-dim));
+}
+
+/* ===== Terminal prefix en cards ===== */
+.terminal-prefix {
+    color: var(--verde);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    opacity: 0.6;
+}
+
+/* ===== Botones ===== */
+.btn-hack {
+    font-family: var(--fuente-mono);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+}
+
+.btn-hack-verde {
+    background: transparent;
+    color: var(--verde);
+    border: 1px solid var(--verde);
+}
+
+.btn-hack-verde:hover {
+    background: var(--verde);
+    color: var(--negro);
+    box-shadow: 0 0 15px var(--verde-glow);
+}
+
+.btn-hack-rojo {
+    background: transparent;
+    color: var(--rojo-hack);
+    border: 1px solid var(--rojo-hack);
+}
+
+.btn-hack-rojo:hover {
+    background: var(--rojo-hack);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+}
+
+/* ===== Consejos ===== */
+.consejo-item-hack {
+    background-color: var(--negro-card) !important;
+    border: 1px solid var(--verde-borde) !important;
+    border-radius: 3px !important;
+    color: var(--texto) !important;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    padding: 14px 18px !important;
+    transition: all 0.3s;
+    margin-bottom: 8px !important;
+}
+
+.consejo-item-hack:hover {
+    border-color: var(--verde) !important;
+    background-color: rgba(0, 255, 65, 0.04) !important;
+    padding-left: 26px !important;
+}
+
+.consejo-num {
+    color: var(--verde);
+    margin-right: 12px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* ===== Título de sección ===== */
+.section-title {
+    font-family: var(--fuente-titulo);
+    color: var(--verde);
+    letter-spacing: 4px;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    text-shadow: 0 0 10px var(--verde-dim);
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--texto-dim);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 2.5rem;
+}
+
+/* ===== Footer ===== */
+.footer-hack {
+    background-color: var(--negro);
+    border-top: 1px solid var(--verde-borde);
+    color: var(--texto-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 1.2rem 0;
+    margin-top: auto;
+}
+
+/* ===== Main ===== */
+main.container {
+    flex: 1;
+}
+/* ===== Easter egg trigger ===== */
+.easter-trigger {
+    color: #00ff41;
+    opacity: 0.4;
+    text-decoration: none;
+    cursor: default;
+    transition: opacity 0.5s;
+}
+
+.easter-trigger:hover {
+    opacity: 0.41;
+    color: #00ff41;
+}

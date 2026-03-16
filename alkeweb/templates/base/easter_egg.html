@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* ===== Matrix rain canvas ===== */
+        canvas {
+            display: block;
+        }
+
+        /* ===== Mensaje central ===== */
+        .mensaje {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            animation: aparecer 3s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes aparecer {
+            0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .caja {
+            border: 1px solid #00ff41;
+            padding: 2.5rem 4rem;
+            background: rgba(0, 0, 0, 0.75);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.2),
+                        inset 0 0 40px rgba(0, 255, 65, 0.05);
+            position: relative;
+        }
+
+        /* Esquinas decorativas */
+        .caja::before, .caja::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            border-color: #00ff41;
+            border-style: solid;
+        }
+        .caja::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+        .caja::after  { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+        .titulo-egg {
+            font-size: clamp(1.4rem, 4vw, 2.5rem);
+            color: #00ff41;
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px #00ff41, 0 0 40px #00cc33;
+            animation: glitch 3s infinite;
+        }
+
+        /* Efecto glitch en el título */
+        @keyframes glitch {
+            0%,  90%, 100% { text-shadow: 0 0 20px #00ff41, 0 0 40px #00cc33; transform: none; }
+            91%             { text-shadow: -3px 0 #ff003c, 3px 0 #00ffff; transform: skewX(-5deg); }
+            93%             { text-shadow: 3px 0 #ff003c, -3px 0 #00ffff; transform: skewX(5deg); }
+            95%             { text-shadow: 0 0 20px #00ff41; transform: none; }
+        }
+
+        .subtitulo-egg {
+            color: #4a7a52;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            margin-top: 0.8rem;
+        }
+
+        .codigo {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: #00cc33;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        /* Cursor parpadeante */
+        .cursor {
+            display: inline-block;
+            width: 10px; height: 1.1em;
+            background: #00ff41;
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+            box-shadow: 0 0 8px #00ff41;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
+        }
+
+        .volver {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            color: #1a3a1a;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            transition: color 0.4s;
+            z-index: 20;
+        }
+
+        .volver:hover {
+            color: #00ff41;
+            text-shadow: 0 0 8px #00ff41;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas para Matrix rain -->
+    <canvas id="matrix"></canvas>
+
+    <!-- Mensaje central -->
+    <div class="mensaje">
+        <div class="caja">
+            <div class="titulo-egg">ACCESO CONCEDIDO</div>
+            <div class="subtitulo-egg">// encontraste el easter egg</div>
+            <div class="codigo">
+                usuario@ciberseguro:~$ whoami<br>
+                <span style="color:#00ff41;">► hacker_curioso</span><span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link de regreso casi invisible -->
+    <a href="/" class="volver">[ esc ]</a>
+
+    <script>
+        // ===== Matrix Digital Rain =====
+        const canvas = document.getElementById('matrix');
+        const ctx    = canvas.getContext('2d');
+
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF<>{}[]//\\;:';
+        const fontSize = 14;
+        const cols = Math.floor(canvas.width / fontSize);
+        const drops = Array(cols).fill(1);
+
+        function drawMatrix() {
+            // Fade trail
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = fontSize + 'px Share Tech Mono, monospace';
+
+            drops.forEach((y, i) => {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const x    = i * fontSize;
+
+                // Caracter cabeza más brillante
+                if (Math.random() > 0.95) {
+                    ctx.fillStyle = '#ffffff';
+                } else {
+                    ctx.fillStyle = '#00ff41';
+                }
+
+                ctx.fillText(char, x, y * fontSize);
+
+                if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            });
+        }
+
+        setInterval(drawMatrix, 40);
+
+        // Ajustar al redimensionar
+        window.addEventListener('resize', () => {
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+
+</body>
+</html>

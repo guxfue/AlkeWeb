@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% block titulo %}Consejos — CiberSeguro{% endblock %}
+
+{% block contenido %}
+
+<h2 class="section-title mb-1">// PROTOCOLOS DE DEFENSA</h2>
+<p class="section-subtitle">root@ciberseguro:~$ load-protocol --security-level=max</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <ul class="list-unstyled">
+            {% for consejo in consejos %}
+            <li class="consejo-item-hack d-flex align-items-start">
+                <span class="consejo-num">[{{ forloop.counter|stringformat:"02d" }}]</span>
+                <span>{{ consejo }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
