@@ -58,8 +58,8 @@ ciberseguridad/
 
 ### 1. Clona el repositorio
 
-git clone https://github.com/tu-usuario/ciberseguro.git
-cd ciberseguro
+git clone https://github.com/guxfue/AlkeWeb.git
+cd AlkeWeb
 
 2. Crea y activa el entorno virtual
 
@@ -85,23 +85,6 @@ Ruta	Descripción
 /	Página de inicio con hero y módulos
 /amenazas/	Listado de amenazas cibernéticas con nivel de riesgo
 /consejos/	Protocolos de defensa y buenas prácticas
-
-🎯 Requerimientos del módulo cubiertos
-✅ Proyecto Django creado y ejecutable
-
-✅ Aplicación base registrada en INSTALLED_APPS
-
-✅ URLs configuradas a nivel de proyecto y de aplicación
-
-✅ Vistas que responden a solicitudes HTTP
-
-✅ Templates HTML con herencia mediante base.html
-
-✅ Datos dinámicos enviados desde vistas con contexto
-
-✅ Archivos estáticos CSS propios integrados
-
-✅ Bootstrap 5 integrado vía CDN
 
 🕹️ Easter Egg
 El proyecto incluye una página secreta.
